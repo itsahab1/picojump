@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://de506das7o0xh"]
+
+[ext_resource type="Script" path="res://Player/script/player.gd" id="1_6ofv7"]
+[ext_resource type="Texture2D" uid="uid://dkaodq6v5h74m" path="res://Player/sprite/tile_0000.png" id="2_1yh4o"]
+[ext_resource type="Texture2D" uid="uid://cvdrux8tpu00v" path="res://Player/sprite/tile_0001.png" id="3_gi38c"]
+[ext_resource type="PackedScene" uid="uid://b00gpuyxj7lkk" path="res://UI/player_ui.tscn" id="4_x6sdw"]
+[ext_resource type="AudioStream" uid="uid://xwn5yxq8khx5" path="res://Player/Sound/Jump.wav" id="5_iigdn"]
+[ext_resource type="AudioStream" uid="uid://b062w22wuyqcy" path="res://Player/Sound/Hurt.wav" id="6_3ia26"]
+[ext_resource type="AudioStream" uid="uid://dwfte6ywcaxjd" path="res://Player/Sound/Shoot.wav" id="7_1doqh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhl08"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yh4o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gi38c")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1yh4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gi38c")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtle1"]
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cxug"]
+radius = 11.0
+height = 26.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(0, -1)
+script = ExtResource("1_6ofv7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_fhl08")
+animation = &"run"
+frame_progress = 0.959606
+
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(16, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vtle1")
+
+[node name="DamageArea" type="Area2D" parent="." groups=["player"]]
+position = Vector2(-19, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(19, 2)
+shape = SubResource("CapsuleShape2D_7cxug")
+debug_color = Color(0.996078, 0, 0.211765, 0.419608)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerUI" parent="Control" instance=ExtResource("4_x6sdw")]
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_iigdn")
+volume_db = -18.0
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("6_3ia26")
+volume_db = -20.935
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("7_1doqh")
+volume_db = -27.688
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

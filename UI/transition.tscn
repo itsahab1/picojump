@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://niexwgrsot2h"]
+
+[ext_resource type="Script" path="res://UI/transition.gd" id="1_x2rwd"]
+[ext_resource type="Texture2D" uid="uid://c378a7ymgfa5d" path="res://UI/TransitionImage.png" id="2_253a1"]
+
+[sub_resource type="Animation" id="Animation_r1qlx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionImage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(742, 96)]
+}
+
+[sub_resource type="Animation" id="Animation_64y4x"]
+resource_name = "in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionImage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.52, 0.53, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(733, 90), Vector2(422, 90), Vector2(924, 360), Vector2(827, 360), Vector2(273, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_7rvpx"]
+resource_name = "out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionImage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(464, 90), Vector2(-400, 90)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nhao"]
+_data = {
+"RESET": SubResource("Animation_r1qlx"),
+"in": SubResource("Animation_64y4x"),
+"out": SubResource("Animation_7rvpx")
+}
+
+[node name="Transition" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_x2rwd")
+
+[node name="TransitionImage" type="Sprite2D" parent="."]
+modulate = Color(0.392223, 0.592874, 0.752307, 1)
+z_index = 4
+position = Vector2(742, 96)
+scale = Vector2(1.20596, 0.997917)
+texture = ExtResource("2_253a1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6nhao")
+}

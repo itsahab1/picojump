@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba3lx156cjxoc"]
+
+[ext_resource type="Script" path="res://enemies/enemy/script/enemy.gd" id="1_5lv7b"]
+[ext_resource type="Texture2D" uid="uid://ci83jwe5qtees" path="res://enemies/enemy/sprite/tile_0021.png" id="2_d78j3"]
+[ext_resource type="Texture2D" uid="uid://drw843ln0dnwu" path="res://enemies/enemy/sprite/tile_0022.png" id="3_23sfh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idiuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d78j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_23sfh")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scmw7"]
+size = Vector2(24, 21)
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_5lv7b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_idiuq")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+scale = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_scmw7")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(21, -10)
+target_position = Vector2(0, 24)

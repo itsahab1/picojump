@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://hhtbjl0cd3tg"]
+
+[ext_resource type="Script" path="res://UI/pause_menu.gd" id="1_jfm1e"]
+[ext_resource type="FontFile" uid="uid://djnk203cgmk4x" path="res://UI/Pixellari.ttf" id="2_kowhu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_40uip"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hu6gn"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jfm1e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 3
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Resume" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 111.0
+offset_top = 102.0
+offset_right = 206.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.407843, 0.45098, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_kowhu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_40uip")
+text = "Resume"
+flat = true
+
+[node name="Main Menu" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 115.0
+offset_top = 129.0
+offset_right = 210.0
+offset_bottom = 169.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.407843, 0.45098, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_kowhu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hu6gn")
+text = "Main Menu"
+flat = true
+
+[connection signal="pressed" from="CanvasLayer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main Menu" to="." method="_on_main_menu_pressed"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvswm3ytxfjjt"]
+
+[ext_resource type="Script" path="res://world/Coin.gd" id="1_vxppl"]
+[ext_resource type="Texture2D" uid="uid://dw4oipomstpnl" path="res://world/sprite/coin.png" id="2_3cpen"]
+[ext_resource type="AudioStream" uid="uid://bxhpdvjr8sbul" path="res://Player/Sound/pickupCoin.wav" id="3_782q5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_foiny"]
+radius = 6.0
+height = 12.0
+
+[node name="Coin" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_vxppl")
+
+[node name="Coin" type="Sprite2D" parent="Area2D"]
+texture_filter = 1
+texture = ExtResource("2_3cpen")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_foiny")
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_782q5")
+volume_db = -24.12
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

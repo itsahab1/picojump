@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw7l6mnkojt4h"]
+
+[ext_resource type="AudioStream" uid="uid://br7amqgr6y6t0" path="res://Player/Sound/BulletHit.wav" id="1_34bk8"]
+
+[node name="BulletHit" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_34bk8")
+volume_db = -17.254

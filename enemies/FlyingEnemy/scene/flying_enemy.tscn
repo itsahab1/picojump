@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckqas13cvb8tp"]
+
+[ext_resource type="Script" path="res://enemies/FlyingEnemy/script/flying_enemy.gd" id="1_4yn4o"]
+[ext_resource type="Texture2D" uid="uid://ddeuu3bm5aajb" path="res://enemies/FlyingEnemy/sprite/tile_0024.png" id="1_x2sww"]
+[ext_resource type="Texture2D" uid="uid://c4ewhcmwwn20k" path="res://enemies/FlyingEnemy/sprite/tile_0025.png" id="2_nb0a6"]
+[ext_resource type="Texture2D" uid="uid://b6ukg6mdolq2t" path="res://enemies/FlyingEnemy/sprite/tile_0026.png" id="3_ugiwf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6t58a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x2sww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nb0a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ugiwf")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi275"]
+radius = 9.0
+height = 18.0
+
+[node name="FlyingEnemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_4yn4o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6t58a")
+animation = &"fly"
+frame_progress = 0.640092
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qi275")
